@@ -62,7 +62,7 @@ adjust( mpfr_t r, mpfr_t x )
   if ( xpn <=  (-1*digits) ) {
     mpfr_set_zero( r, sign ) ; }
   else {
-      mpfr_set( r, x, MPFR_RNDN ) ;
+    mpfr_set( r, x, MPFR_RNDN ) ;
   }
   if ( str != NULL )
     mpfr_free_str( str ) ;
@@ -109,11 +109,6 @@ static void rxmpfrTerm( RexxThreadContext *context )
 }
 
 /*  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    ooRexx version check
-*/
-
-
-/*  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     mpfr version check
 */
 RexxRoutine1( RexxObjectPtr, rxmpfrVersion ,
@@ -122,14 +117,13 @@ RexxRoutine1( RexxObjectPtr, rxmpfrVersion ,
   //  size_t ooRexxVersion=getInterpreterVersion();
 
   int RC; int l; char b[BUFSZ];
-  RexxArrayObject vers ;
-  vers = context->NewArray(0);
+  RexxArrayObject versions ;
+  versions = context->NewArray(0);
 
   l = snprintf( b, BUFHI, "%s", MPFR_VERSION_STRING ) ;
-  RC = context->ArrayAppendString(vers, b, l);
+  RC = context->ArrayAppendString(versions, b, l);
   l = snprintf( b, BUFHI, "%s", mpfr_get_version() );
-  RC = context->ArrayAppendString(vers, b, l);
-
+  RC = context->ArrayAppendString(versions, b, l);
 
   if ( Warn != NULL )
   {
@@ -138,10 +132,10 @@ RexxRoutine1( RexxObjectPtr, rxmpfrVersion ,
       fprintf (stderr, "Warning: header and library do not match\n");
   }
 
-  return( vers ) ;
+  return( versions ) ;
 
 }
-;
+
 /*  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     configuration
 */
@@ -150,8 +144,8 @@ RexxRoutine1( RexxObjectPtr, rxmpfrConfig ,
 {
   int RC; int l; char f[16]; char b[BUFSZ];;
 
-  RexxArrayObject conf ;
-  conf = context->NewArray(0);
+  RexxArrayObject config ;
+  config = context->NewArray(0);
 
   uint64_t precision, digits;
 
@@ -207,12 +201,12 @@ RexxRoutine1( RexxObjectPtr, rxmpfrConfig ,
   //  return the current/changed settings
 
   l = snprintf( b, BUFHI, "%ld", default_precision ) ;
-  RC = context->ArrayAppendString(conf, b, l);
+  RC = context->ArrayAppendString(config, b, l);
 
   l = snprintf( b, BUFHI, "%ld", default_digits ) ;
-  RC = context->ArrayAppendString(conf, b, l);
+  RC = context->ArrayAppendString(config, b, l);
 
-  return ( conf ) ;
+  return ( config ) ;
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -302,8 +296,8 @@ RexxRoutine5( RexxObjectPtr, rxmpfrSinCos, CSTRING, X,
   mpfr_inits2( default_precision,
     x, s, c, (mpfr_ptr) 0) ;
 
-  RexxArrayObject r;
-  r = context->NewArray(0) ;
+  RexxArrayObject sincos;
+  sincos = context->NewArray(0) ;
 
   RC = mpfr_set_str( x, X, BASE, MPFR_RNDN ) ;
   if ( RC != 0 ) {
@@ -319,16 +313,16 @@ RexxRoutine5( RexxObjectPtr, rxmpfrSinCos, CSTRING, X,
   l = sprintf( f, "%s%lu%s", "%.", default_digits , "R*G" ) ;
 
   l = mpfr_snprintf( b, BUFHI, f , MPFR_RNDN, s ) ;
-  RC = context->ArrayAppendString( r, b, l );
+  RC = context->ArrayAppendString( sincos, b, l );
   if ( argumentExists(2) && argumentExists(3) )
     context->SetContextVariable( S, context->NewString( b, l) );
 
   l = mpfr_snprintf( b, BUFHI, f , MPFR_RNDN, c ) ;
-  RC = context->ArrayAppendString( r, b, l ) ;
+  RC = context->ArrayAppendString( sincos, b, l ) ;
   if ( argumentExists(2) && argumentExists(3) )
     context->SetContextVariable( C, context->NewString( b, l) );
 
-  return (r) ;
+  return (sincos) ;
 
 }
 
@@ -345,8 +339,8 @@ ARCT( PREFIXED(Atan),   mpfr_atan )
 RexxRoutine4( RexxObjectPtr, rxmpfrAtan2, CSTRING, X, CSTRING, Y,
   OPTIONAL_uint32_t, Prec, OPTIONAL_CSTRING, Units ) {
   int RC; int l; char f[16]; char b[BUFSZ]; ;
-  mpfr_t r, x, y ;
-  mpfr_inits2( default_precision, r, x, y, (mpfr_ptr) 0) ;
+  mpfr_t atan, x, y ;
+  mpfr_inits2( default_precision, atan, x, y, (mpfr_ptr) 0) ;
   RC = mpfr_set_str( x, X, BASE, MPFR_RNDN );
   if ( RC != 0 ) {
     context->InvalidRoutine();
@@ -357,13 +351,13 @@ RexxRoutine4( RexxObjectPtr, rxmpfrAtan2, CSTRING, X, CSTRING, Y,
     context->InvalidRoutine();
     return context->NullString() ;
   }
-  RC = mpfr_atan2( r, x, y, MPFR_RNDN ) ;
+  RC = mpfr_atan2( atan, x, y, MPFR_RNDN ) ;
   if ( Units == NULL || *Units == 'D' || *Units == 'd' ) {
-    RC = mpfr_mul( r, r, M_degrees , MPFR_RNDN ) ;
+    RC = mpfr_mul( atan, atan, M_degrees , MPFR_RNDN ) ;
   }
   l = sprintf( f, "%s%lu%s", "%.", default_digits, "R*G" ) ;
-  l = mpfr_snprintf( b, BUFHI, f , MPFR_RNDN, r ) ;
-  mpfr_clears( r, x, y, (mpfr_ptr) 0) ;
+  l = mpfr_snprintf( b, BUFHI, f , MPFR_RNDN, atan ) ;
+  mpfr_clears( atan, x, y, (mpfr_ptr) 0) ;
   mpfr_free_cache() ;
   return (RexxObjectPtr)context->NewString( b, l ) ;
 }

@@ -1,63 +1,86 @@
-#   README
-*   extending the original rxMath external library
-*   . . .
-*   full rewrite :-)
-*   NO object oriented, plain simple c/cpp
-*   more functions supported
-*   . . .
-*   `double`, `long double` and `quadmath` support
-*
+##  README
+**  a ooRexx external function to interface the MPFR  library
+*   `https://www.mpfr.org/mpfr-current/mpfr.html`
 * * *
 
 ##  COPYRIGHT
-*   Copyright (c) 2019, 2020 Enrico Sorichetti
+*   Copyright (c) 2022, 2023 Enrico Sorichetti
 *   Distributed under the Boost Software License, Version 1.0
 *   See accompanying file `LICENSE_1_0.txt` or copy at
 *   `[http://www.boost.org/LICENSE_1_0.txt](http://www.boost.org/LICENSE_1_0.txt)`
 * * *
 
+##  DISCLAIMER
+*   ...
+*   the code works
+*   the documentation is completely missing
+* * *
+
+##  FUNCTIONS implemented
+*
+*   initialization/termination
+*   configuration precision selection
+*   handy constants
+*   conversions
+*
+*   mpfr functions interfaced
+*   `mpfr_sqrt  `
+*   `mpfr_cbrt  `
+*   `mpfr_exp   `
+*   `mpfr_expm1 `
+*   `mpfr_exp2  `
+*   `mpfr_log   `
+*   `mpfr_log1p `
+*   `mpfr_log2  `
+*   `mpfr_log10 `
+*   `mpfr_pow   `
+*   `mpfr_hypot `
+*   `mpfr_cos `
+*   `mpfr_sin `
+*   `mpfr_tan `
+*   `mpfr_sec `
+*   `mpfr_cot `
+*   `mpfr_csc `
+*   `mpfr_sin_cos `
+*   `mpfr_acos `
+*   `mpfr_asin `
+*   `mpfr_atan `
+*   `mpfr_atan2`
+** * *
+
+##  WORK IN PROGRESS
+*   reading the manual for the new functions
+*   `mpfr_cosu, mpfr_sinu, mpfr_tanu, mpfr_acosu, mpfr_asinu, mpfr_atanu and mpfr_atan2u`
+*   `mpfr_cospi, mpfr_sinpi, mpfr_tanpi, mpfr_acospi, mpfr_asinpi, mpfr_atanpi and mpfr_atan2pi.`
+*   `mpfr_log2p1, mpfr_log10p1, mpfr_exp2m1, mpfr_exp10m1 and mpfr_compound_si.`
+*   `mpfr_fmod_ui, mpfr_powr, mpfr_pown, mpfr_pow_uj, mpfr_pow_sj and mpfr_rootn_si`
+* * *
+
 ##  Repository
 *   . . .
-*   `https://github.com/00003481/rxMath.git`
-*   `git@github.com:00003481/rxMath.git `
+*   `https://github.com/atncsj6h/rxMpfr.git`
+*   `git@github.com:atncsj6h/rxMpfr.git`
 * * *
 
 ##  prerequisites
 *   . . .
-*   cmake ( minimum 3.18 )
 * * *
 
 ##  nice to have
 *   . . .
-*   ccache to speed up builds
-*   available at `https://github.com/ccache/ccache/releases`
 * * *
 
 ##  How to
-*   the `_cmake` script in the directory cmake/Tools will work
-*   for a full install of rxmath/rxmath128 when ...
-*   the compiler is the GNU gcc/g++
-*   and quadmath + quadmath-devel have been installed
-*   . . .
-*   on apple only the rxmath library will be built,
-*   unless a GNU compiler suite has been installed
-*   the `_gmake` script will help in doing it
-*   naturally the `_gmake` script will have to be modified to point to gcc/g++
-*   . . .
-*   no need to install, will run nicely from the `build directory`
-*   just point the `LD_LIBRARY_PATH` to `<build directory>/lib`
-*   . . .
+*   ...
 * * *
 
 ##  Additional considerations
+*   ...
 * * *
 
 ##  tested and working on
-*   APPLE High Sierra / Mojave
-*   Fedora 32/33
+*   APPLE Big Sur, High Sierra
 *   . . .
-*   just rebuilding the Vagrant environment for
-*   FreeBSD, NetBSD, OpenBSD
 * * *
 
 ##  NOTES
