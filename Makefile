@@ -3,13 +3,13 @@
 LIBP = lib
 LIB1 = rxmpfr
 
-REXX_CFLAGS := $(shell ooRexx-config  --cflags)
+REXX_CFLAGS := $(shell oorexx-config  --cflags)
 MPFR_CFLAGS := $(shell pkgconf mpfr   --cflags)
 
 OTHR_CFLAGS  = -DHAVE_STDBOOL_H -DHAVE_STDINT_H -fPIC
 
-REXX_LFLAGS := $(shell ooRexx-config --libs)
-REXX_RPATH  := $(shell ooRexx-config --rpath)
+REXX_LFLAGS := $(shell oorexx-config --libs)
+REXX_RPATH  := $(shell oorexx-config --rpath)
 
 MPFR_LFLAGS := $(shell pkgconf mpfr  --libs)
 
