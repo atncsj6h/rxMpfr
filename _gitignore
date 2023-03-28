@@ -1,0 +1,10 @@
+.DS_Store
+CMakeCache.txt
+CMakeFiles
+Makefile
+cmake_install.cmake
+*.o
+*.a
+*.so
+*.dylib
+vars_*

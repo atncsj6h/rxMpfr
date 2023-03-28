@@ -5,23 +5,24 @@
   http://www.boost.org/LICENSE_1_0.txt)
 */
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-*/
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #include <errno.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
 
-#include "oorexxapi.h"
-
-/*  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-*/
-#include "oorexxapi.h"
-
-/*  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-*/
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #include <mpfr.h>
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#include "oorexxapi.h"
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#include "xmalloc.h"
+#include "xstringops.h"
+
 #include "rxmpfr.h"
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

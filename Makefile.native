@@ -23,7 +23,7 @@ else
 endif
 
 # What we want to build.
-all: lib$(LIB1).$(EXT)
+all: $(LIBP)$(LIB1).$(EXT)
 
 $(LIB1).o: $(LIB1).cpp
 	$(CC) -c $(LIB1).cpp $(REXX_CFLAGS) $(MPFR_CFLAGS) $(OTHR_CFLAGS) -o $(LIB1).o
@@ -31,5 +31,6 @@ $(LIB1).o: $(LIB1).cpp
 $(LIBP)$(LIB1).$(EXT): $(LIB1).o
 	$(CC) $(LIB1).o $(REXX_LFLAGS) $(MPFR_LFLAGS) $(OTHR_LFLAGS) -o $(LIBP)$(LIB1).$(EXT)
 
+.PHONY: clean
 clean:
 	rm -f *.o  *.so *.dylib
